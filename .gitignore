@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.dist/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Local configuration / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local datasets and model artifacts
+data/raw/
+data/private/
+models/
+checkpoints/
+*.safetensors
+*.gguf
+*.pt
+*.pth
+*.bin
+
+# Local experiment output
+runs/
+results/raw/
+*.log
+.DS_Store

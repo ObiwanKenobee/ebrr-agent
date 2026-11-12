@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "If you use this research scaffold, cite the repository URL and the specific release or commit you used."
+title: "Ground Before You Generate: Evidence-Budgeted Repository Reasoning"
+type: software
+abstract: >-
+  Research scaffold for investigating evidence-grounded, resource-aware
+  repository reasoning in compact software engineering agents.
+version: 0.1.0
+date-released: 2026-11-12

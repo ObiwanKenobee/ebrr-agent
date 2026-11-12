@@ -1,0 +1,29 @@
+project:
+  name: ebrr
+  title: "Ground Before You Generate"
+  stage: pre-experimental
+
+model:
+  provider: null
+  model_id: null       # Set only after verifying the exact competition model identifier.
+  revision: null
+  quantization: null
+
+retrieval:
+  strategy: symbol_grounded_graph
+  max_candidates: 20
+  max_graph_expansions: 40
+
+budget:
+  max_tokens: 12000
+  max_tool_calls: 40
+  max_graph_expansions: 40
+  max_verification_actions: 8
+
+reproducibility:
+  seed: 17
+  deterministic: true
+  record_hardware: true
+  record_runtime: true
+
+# These are initial engineering defaults, not empirically optimized settings.
