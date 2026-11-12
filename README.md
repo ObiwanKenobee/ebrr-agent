@@ -2,7 +2,7 @@
 
 **Evidence-Budgeted Repository Reasoning (EBRR)** for reliable, resource-constrained software engineering agents.
 
-> Research scaffold. This repository currently contains the project specification, experimental protocol, and a small set of foundational Python abstractions. It does **not** yet contain a Gemma fine-tune, a benchmark result, or a claim of improved repair performance.
+> Research implementation in progress. The repository now contains a deterministic AST symbol index, a defensive adapter for the competition graph-tool response format, and a budget-aware symbol-grounded retrieval controller. It does **not** yet contain a Gemma fine-tune, a live ADK integration, a benchmark result, or a claim of improved repair performance.
 
 ## Research question
 
@@ -17,13 +17,16 @@ EBRR is a research framework for studying how a small coding agent chooses what 
 - [x] Initial research framing and questions
 - [x] Architecture and experiment protocol drafts
 - [x] Minimal typed evidence and resource-budget primitives
-- [ ] Audit the competition harness, dataset, graph schema, and embedding interface
-- [ ] Implement baseline retrieval methods
-- [ ] Implement EBRR retrieval and evidence-selection policy
-- [ ] Run retrieval diagnostics and end-to-end repair experiments
+- [x] Initial public competition harness/tool-contract audit (exact Kaggle bundle recheck pending)
+- [x] Deterministic AST symbol index and lexical grounding baseline
+- [x] Typed graph response adapter and bounded retrieval controller
+- [ ] Verify adapters against the exact Kaggle wheel and real graph/embedding files
+- [ ] Measure retrieval quality against labeled public development tasks
+- [ ] Implement evidence-ledger scoring and adaptive exploration policy
+- [ ] Run end-to-end repair experiments
 - [ ] Publish reproducible results and paper
 
-See [RESEARCH_STATUS.md](RESEARCH_STATUS.md) for the current evidence boundary and [docs/](docs/) for the research plan.
+See [RESEARCH_STATUS.md](RESEARCH_STATUS.md) for the current evidence boundary and [docs/](docs/) for the research plan. Start with [the harness audit](docs/COMPETITION_HARNESS_AUDIT.md) and [the retrieval baseline note](docs/RETRIEVAL_BASELINE.md).
 
 ## Repository layout
 
@@ -52,8 +55,6 @@ pytest
 ruff check .
 ```
 
-The initial package is deliberately small. The first implementation milestone is to make resource accounting and evidence records explicit before adding model calls or benchmark-specific adapters.
-
 ## Research principles
 
 1. **Ground before generating.** Retrieve and inspect relevant repository evidence before proposing a modification.
@@ -61,7 +62,7 @@ The initial package is deliberately small. The first implementation milestone is
 3. **Preserve provenance.** A diagnosis must point back to inspectable files, symbols, tests, or execution observations.
 4. **Budget exploration.** Record tokens, tool calls, graph expansions, and verification actions.
 5. **Verify, do not merely narrate.** Report exactly which checks ran and their outcomes.
-6. **Do not leak evaluation answers.** Reference patches and hidden validation tests are evaluation assets, not agent context.
+6. **Do not leak evaluation answers.** Reference patches and hidden tests are evaluation assets, not agent context.
 7. **Report negative results.** Failed tasks and ablations are part of the research record.
 
 ## Reproducibility and data
@@ -69,6 +70,8 @@ The initial package is deliberately small. The first implementation milestone is
 Do not commit benchmark repositories, private code, model weights, credentials, Kaggle secrets, or hidden test data. Before downloading or redistributing any dataset or repository snapshot, record its source, license, version, permitted use, and checksum. See [Data governance](docs/DATA_GOVERNANCE.md).
 
 Each experiment should have a frozen configuration, code revision, model identifier and revision, dataset version, random seed, hardware/runtime description, and machine-readable results. See [Experiment protocol](docs/EXPERIMENT_PROTOCOL.md).
+
+The retrieval core is deterministic and model-independent. Its graph-tool protocol is injectable for local tests; it is not yet connected directly to the competition ADK runtime. Unit tests use synthetic repositories and fake graph-tool responses, not the Kaggle task dataset.
 
 ## Citation
 
